@@ -10,26 +10,26 @@ namespace TestyProjekt.ZagórkiNorbert
 {
     class GetMethods
     {
-        public static string GetText(IWebDriver driver, string element, string elementtype)
+        public static string GetText( string element, PropertyType elementtype)
         {
             switch (elementtype)
             {
-                case "Id":
-                    return driver.FindElement(By.Id(element)).GetAttribute("value");
-                case "Name":
-                    return driver.FindElement(By.Name(element)).GetAttribute("value");
+                case PropertyType.Id:
+                    return PropertiesCollection.driver.FindElement(By.Id(element)).GetAttribute("value");
+                case PropertyType.Name:
+                    return PropertiesCollection.driver.FindElement(By.Name(element)).GetAttribute("value");
                 default:
                     return  String.Empty;
             }
         }
-        public static string GetTextFromList(IWebDriver driver, string element, string elementtype)
+        public static string GetTextFromList( string element, PropertyType elementtype)
         {
             switch (elementtype)
             {
-                case "Id":
-                    return new SelectElement(driver.FindElement(By.Id(element))).AllSelectedOptions.SingleOrDefault().Text;
-                case "Name":
-                    return new SelectElement(driver.FindElement(By.Name(element))).AllSelectedOptions.SingleOrDefault().Text;
+                case PropertyType.Id:
+                    return new SelectElement(PropertiesCollection.driver.FindElement(By.Id(element))).AllSelectedOptions.SingleOrDefault().Text;
+                case PropertyType.Name:
+                    return new SelectElement(PropertiesCollection.driver.FindElement(By.Name(element))).AllSelectedOptions.SingleOrDefault().Text;
                 default:
                     return String.Empty;
             }

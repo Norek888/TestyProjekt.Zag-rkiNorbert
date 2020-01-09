@@ -12,7 +12,7 @@ namespace TestyProjekt.ZagórkiNorbert
 {
     class Program
     {
-        IWebDriver driver = new ChromeDriver();
+        
         static void Main(string[] args)
         {
             
@@ -21,7 +21,9 @@ namespace TestyProjekt.ZagórkiNorbert
         [SetUp]
         public void Initialize()
         {
-            driver.Navigate().GoToUrl("http://www.executeautomation.com/demosite/index.html?UserName=&Password=&Login=Login");
+            PropertiesCollection.driver = new ChromeDriver();
+
+            PropertiesCollection.driver.Navigate().GoToUrl("http://www.executeautomation.com/demosite/index.html?UserName=&Password=&Login=Login");
             Console.WriteLine("Opened URL:");
         }
 
@@ -30,20 +32,20 @@ namespace TestyProjekt.ZagórkiNorbert
         {
             
             //EnterText(element,value,type)
-            SetMethods.SelectDropDown(driver, "TitleId", "Mr.", "Id");
+            SetMethods.SelectDropDown( "TitleId", "Mr.", PropertyType.Id);
 
-            SetMethods.EnterText(driver,"Initial","executeautomation","Name");
+            SetMethods.EnterText("Initial","executeautomation",PropertyType.Name);
 
-            Console.WriteLine("The value from my Title is:" + GetMethods.GetTextFromList(driver,"TitleId","Id"));
+            Console.WriteLine("The value from my Title is:" + GetMethods.GetTextFromList("TitleId",PropertyType.Id));
             
-            Console.WriteLine("The value from my initial is:" + GetMethods.GetText(driver, "Initial", "Name"));
-            SetMethods.Click(driver, "Save", "Name");
+            Console.WriteLine("The value from my initial is:" + GetMethods.GetText( "Initial", PropertyType.Name));
+            SetMethods.Click( "Save", PropertyType.Name);
         }
 
         [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            PropertiesCollection.driver.Close();
             Console.WriteLine("Close");
         }
     }
