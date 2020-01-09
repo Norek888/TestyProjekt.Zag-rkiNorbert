@@ -23,23 +23,21 @@ namespace TestyProjekt.ZagórkiNorbert
         {
             PropertiesCollection.driver = new ChromeDriver();
 
-            PropertiesCollection.driver.Navigate().GoToUrl("http://www.executeautomation.com/demosite/index.html?UserName=&Password=&Login=Login");
+            PropertiesCollection.driver.Navigate().GoToUrl("http://www.executeautomation.com/demosite/Login.html");
             Console.WriteLine("Opened URL:");
         }
 
         [Test]
         public void ExecuteTest()
         {
-            
-            //EnterText(element,value,type)
-            SetMethods.SelectDropDown( "TitleId", "Mr.", PropertyType.Id);
 
-            SetMethods.EnterText("Initial","executeautomation",PropertyType.Name);
+            //Logowanie do aplikacji
 
-            Console.WriteLine("The value from my Title is:" + GetMethods.GetTextFromList("TitleId",PropertyType.Id));
-            
-            Console.WriteLine("The value from my initial is:" + GetMethods.GetText( "Initial", PropertyType.Name));
-            SetMethods.Click( "Save", PropertyType.Name);
+            LoginPage pageLogin = new LoginPage();
+            EAPageObject pageEA = pageLogin.Login("krzysiu", "1234");
+
+            pageEA.FillUserForm("KK","Zagorski", "Norbert");
+
         }
 
         [TearDown]
